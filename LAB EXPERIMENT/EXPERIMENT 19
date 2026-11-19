@@ -1,0 +1,29 @@
+import pandas as pd
+from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score
+
+data = pd.DataFrame({
+    'Income': [25000, 40000, 50000, 60000, 30000, 80000],
+    'Credit': ['Good', 'Good', 'Poor', 'Good', 'Poor', 'Good'],
+    'Loan': ['No', 'Yes', 'No', 'Yes', 'No', 'Yes']
+})
+
+le = LabelEncoder()
+data['Credit'] = le.fit_transform(data['Credit'])
+data['Loan'] = le.fit_transform(data['Loan'])
+
+X = data[['Income', 'Credit']]
+y = data['Loan']
+
+model = GaussianNB()
+model.fit(X, y)
+
+pred = model.predict(X)
+
+print("Predicted Loan Status:", le.inverse_transform(pred))
+print("Accuracy:", accuracy_score(y, pred))
+
+OUTPUT
+Predicted Loan Status: ['No' 'No' 'No' 'Yes' 'No' 'Yes']
+Accuracy: 0.8333333333333334
