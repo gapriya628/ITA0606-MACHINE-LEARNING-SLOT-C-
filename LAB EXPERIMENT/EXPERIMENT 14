@@ -1,0 +1,27 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+
+data = pd.DataFrame({
+    'Area': [1000, 1200, 1500, 1800, 2000, 2500],
+    'Bedrooms': [2, 2, 3, 3, 4, 4],
+    'Price': [2000000, 2500000, 3000000, 3500000, 4000000, 5000000]
+})
+
+X = data[['Area', 'Bedrooms']]
+y = data['Price']
+
+model = LinearRegression()
+model.fit(X, y)
+
+pred = model.predict(X)
+
+print("Predicted Prices:", pred)
+print("R2 Score:", r2_score(y, pred))
+
+print("New House Price:", model.predict([[1600, 3]])[0])
+OUTPUT
+Predicted Prices: [2026200.87336245 2423580.7860262  3002183.40611354 3598253.27510917
+ 3978165.93886463 4971615.72052402]
+R2 Score: 0.9970056144728634
+New House Price: 3200873.3624454145
