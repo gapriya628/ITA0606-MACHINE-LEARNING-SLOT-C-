@@ -1,0 +1,16 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.mixture import GaussianMixture
+
+X = np.array([[1], [2], [3], [8], [9], [10]])
+
+model = GaussianMixture(n_components=2, random_state=42)
+model.fit(X)
+
+labels = model.predict(X)
+
+print("Cluster Labels:", labels)
+print("Cluster Means:", model.means_)
+
+plt.scatter(X, np.zeros(len(X)), c=labels)
+plt.show()
