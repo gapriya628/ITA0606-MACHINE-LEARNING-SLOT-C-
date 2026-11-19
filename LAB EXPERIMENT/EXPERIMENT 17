@@ -1,0 +1,22 @@
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+
+data = pd.DataFrame({
+    'RAM': [2, 3, 4, 6, 8, 12],
+    'Battery': [2000, 2500, 3000, 3500, 4000, 5000],
+    'Storage': [16, 32, 64, 128, 128, 256],
+    'Price_Range': [0, 0, 1, 1, 2, 3]
+})
+
+X = data[['RAM', 'Battery', 'Storage']]
+y = data['Price_Range']
+
+model = RandomForestClassifier(random_state=42)
+model.fit(X, y)
+
+prediction = model.predict([[8, 4500, 128]])
+
+print("Predicted Mobile Price Range:", prediction[0])
+
+OUTPUT
+Predicted Mobile Price Range: 2
