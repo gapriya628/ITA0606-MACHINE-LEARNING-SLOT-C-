@@ -1,0 +1,30 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+data = pd.DataFrame({
+    'Income': [25000, 40000, 60000, 80000, 30000, 90000],
+    'Debt': [20000, 15000, 10000, 5000, 25000, 4000],
+    'Age': [22, 30, 40, 45, 25, 50],
+    'CreditScore': ['Low', 'Medium', 'High', 'High', 'Low', 'High']
+})
+
+X = data[['Income', 'Debt', 'Age']]
+y = data['CreditScore']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+pred = model.predict(X_test)
+
+print("Predicted Credit Scores:", pred)
+print("Accuracy:", accuracy_score(y_test, pred))
+
+OUTPUT
+Predicted Credit Scores: ['Low' 'High']
+Accuracy: 0.5
