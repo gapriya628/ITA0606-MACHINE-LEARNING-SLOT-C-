@@ -1,0 +1,31 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+X = np.array([[1], [2], [3], [4], [5]])
+y = np.array([2, 4, 6, 8, 10])
+
+model = LinearRegression()
+model.fit(X, y)
+
+pred = model.predict(X)
+
+print("Predicted Values:", pred)
+print("Accuracy (R2 Score):", model.score(X, y))
+
+plt.scatter(X, y)
+plt.plot(X, pred)
+plt.show()
+
+OUTPUT
+Predicted Values: [ 2.  4.  6.  8. 10.]
+Accuracy (R2 Score): 1.0
+
+
+
+
+
+
+
+
+
